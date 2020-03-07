@@ -1,0 +1,21 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+@font-face {
+	font-family: "Lusitana";
+	src: url("/fonts/Lusitana-Regular.ttf");
+}
+@font-face {
+	font-family: "Lusitana Bold";
+	src: url("/fonts/Lusitana-Bold.ttf");
+}
+@font-face {
+	font-family: "Raleway";
+	src: url("/fonts/Raleway-Regular.ttf");
+}
+@font-face {
+	font-family: "Raleway Bold";
+	src: url("/fonts/Raleway-Bold.ttf");
+}

@@ -1,0 +1,9 @@
+{
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"css.lint.validProperties": [
+		"css-semicolonexpected"
+	],
+	"vue/html-indent": "off",
+	"css.validate": false
+}
