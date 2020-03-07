@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold lowercase font-display text-gray-700 shadow"
+		class="inline-block bg-gray-200 rounded-full px-3 py-1 m-1 text-sm font-semibold lowercase font-display text-gray-700 shadow"
 		@click="onClick"
 	>
 		<p>

@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div class="mt-4">
-			<p class="text-gray-600 italic text-right m-2">
+			<p class="text-gray-600 italic text-right">
 				{{ calculateTimeDifference }} days ago
 			</p>
 		</div>
