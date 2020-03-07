@@ -48,9 +48,7 @@ export default {
 		},
 		canDispose: {
 			type: Boolean,
-			default: () => {
-				return false
-			}
+			default: () => false
 		}
 	},
 	methods: {

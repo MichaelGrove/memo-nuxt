@@ -108,6 +108,7 @@
 							:cid="category.cid"
 							:label="category.label"
 							:color="category.color"
+							:can-dispose="true"
 							@onDispose="disposeCategory"
 						/>
 					</li>
@@ -233,14 +234,15 @@ export default {
 				return Number(category.cid)
 			}) : []
 
-			this.$axios.post(`/memo/update/${this.mid}`, {
+			const memo = {
 				title: this.title,
 				message: this.message,
 				isFavourite: this.isFavourite ? 1 : 0,
 				isHidden: this.isHidden ? 1 : 0,
 				categories
-			})
-			// TODO update store
+			}
+
+			this.$store.dispatch('updateMemo', { mid: this.mid, memo })
 		},
 		dispose () {
 			if (!this.mid) {

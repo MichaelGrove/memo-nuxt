@@ -56,11 +56,12 @@ export default {
 	},
 	methods: {
 		save () {
-			this.$axios.post('/category/create', {
+			const category = {
 				label: this.label,
 				color: this.color
-			})
-			// TODO update store
+			}
+
+			this.$store.dispatch('createCategory', category)
 		}
 	}
 }

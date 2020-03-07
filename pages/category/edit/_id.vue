@@ -32,7 +32,14 @@
 					class="form-input focus:outline-none focus:shadow-outline"
 				/>
 			</div>
-			<div class="flex items-center justify-between">
+			<div class="flex items-center justify-between mt-8 pt-4 border-t-2">
+				<button
+					type="button"
+					class="form-button bg-red-500 hover:bg-red-600 focus:outline-none focus:shadow-outline"
+					@click="dispose"
+				>
+					Delete
+				</button>
 				<button
 					class="form-button bg-green-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline"
 					type="button"
@@ -83,11 +90,19 @@ export default {
 				return
 			}
 
-			this.$axios.post(`/category/update/${this.cid}`, {
+			const category = {
 				label: this.label,
 				color: this.color
-			})
-			// TODO update store
+			}
+
+			this.$store.dispatch('updateCategory', { cid: this.cid, category })
+		},
+		dispose () {
+			if (!this.cid) {
+				return
+			}
+
+			this.$store.dispatch('removeCategoryById', this.cid)
 		}
 	}
 }

@@ -33,8 +33,20 @@ export const mutations = {
 	initCategories (state, categories) {
 		state.categories = categories
 	},
+	addCategory (state, category) {
+		state.categories = [category, ...state.categories]
+	},
+	updateCategory (state, category) {
+		state.categories = state.categories.map(item => item.cid === category.cid ? category : item)
+	},
+	removeCategoryById (state, cid) {
+		state.categories = state.categories.filter(category => category.cid !== cid)
+	},
 	addMemo (state, memo) {
 		state.memos = [memo, ...state.memos]
+	},
+	updateMemo (state, memo) {
+		state.memos = state.memos.map(item => item.mid === memo.mid ? memo : item)
 	},
 	removeMemoById (state, mid) {
 		state.memos = state.memos.filter(memo => memo.mid !== mid)
@@ -100,6 +112,64 @@ export const actions = {
 			return []
 		})
 	},
+	createCategory (state, category) {
+		this.$axios.post('/category/create', category)
+			.then((response) => {
+				if (response.data && response.data.success) {
+					this.$router.push('/category')
+					if (response.data.data) {
+						this.commit('addCategory', response.data.data)
+					}
+				} else if (response.data && response.data.error) {
+					return Promise.reject(new Error(response.data.error))
+				} else {
+					return Promise.reject(new Error('Unexpected error'))
+				}
+			})
+			.catch((err) => {
+				window.alert(err)
+			})
+	},
+	updateCategory (state, data) {
+		const cid = data.cid
+		const category = data.category
+		this.$axios.post(`/category/update/${cid}`, category)
+			.then((response) => {
+				if (response.data && response.data.success) {
+					this.$router.push('/category')
+					if (response.data.data) {
+						this.commit('updateCategory', response.data.data)
+					}
+				} else if (response.data && response.data.error) {
+					return Promise.reject(new Error(response.data.error))
+				} else {
+					return Promise.reject(new Error('Unexpected error'))
+				}
+			})
+			.catch((err) => {
+				window.alert(err)
+			})
+	},
+	removeCategoryById (state, id) {
+		if (!id) {
+			return
+		}
+
+		this.$axios.post(`/category/delete/${id}`)
+			.then((response) => {
+				if (response.data && response.data.success) {
+					this.$router.push('/category')
+					state.commit('removeCategoryById', id)
+				} else if (response.data && response.data.error) {
+					return Promise.reject(new Error(response.data.error))
+				} else {
+					return Promise.reject(new Error('Unexpected error'))
+				}
+			})
+			.catch((err) => {
+				window.alert(err)
+			})
+	},
 	createMemo (state, memo) {
 		this.$axios.post('/memo/create', memo)
 			.then((response) => {
@@ -108,6 +178,30 @@ export const actions = {
 					if (response.data.data) {
 						this.commit('addMemo', response.data.data)
 					}
+				} else if (response.data && response.data.error) {
+					return Promise.reject(new Error(response.data.error))
+				} else {
+					return Promise.reject(new Error('Unexpected error'))
+				}
+			})
+			.catch((err) => {
+				window.alert(err)
+			})
+	},
+	updateMemo (state, data) {
+		const mid = data.mid
+		const memo = data.memo
+		this.$axios.post(`/memo/update/${mid}`, memo)
+			.then((response) => {
+				if (response.data && response.data.success) {
+					this.$router.push('/')
+					if (response.data.data) {
+						this.commit('updateMemo', response.data.data)
+					}
+				} else if (response.data && response.data.error) {
+					return Promise.reject(new Error(response.data.error))
+				} else {
+					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
@@ -119,7 +213,7 @@ export const actions = {
 			return
 		}
 
-		this.$axios.post(`memo/delete/${id}`)
+		this.$axios.post(`/memo/delete/${id}`)
 			.then((response) => {
 				if (response.data && response.data.success) {
 					this.$router.push('/')
