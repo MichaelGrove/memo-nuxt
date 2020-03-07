@@ -1,6 +1,6 @@
-# NuxtMemo
+# Nuxt Memo
 
-> My wondrous Nuxt.js project
+> An UI for https://github.com/MichaelGrove/MemoApi
 
 ## Build Setup
 
