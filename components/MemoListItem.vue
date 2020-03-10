@@ -4,7 +4,7 @@
 			<h3 class="text-base flex-1 font-bold text-gray-700 font-display">
 				{{ title }}
 			</h3>
-			<nuxt-link :to="`memo/edit/${mid}`">
+			<nuxt-link v-if="authenticated" :to="`memo/edit/${mid}`">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -91,6 +91,9 @@ export default {
 		}
 	},
 	computed: {
+		authenticated () {
+			return this.$store.getters.authenticated
+		},
 		parsedMessage () {
 			const ret = []
 			let message = String(this.message)

@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col mt-8">
+	<div class="flex flex-col mt-8 mx-8">
 		<nuxt-link to="/" class="flex items-center">
 			<span class="text-2xl font-bold inline-block mx-auto font-display-bold text-gray-900">
 				Memo App

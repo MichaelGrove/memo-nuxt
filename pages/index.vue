@@ -15,7 +15,7 @@
 		<div class="flex mb-4">
 			<input
 				type="text"
-				class="search-input mr-4 focus:outline-0 focus:bg-white focus:border-gray-300 placeholder-gray-600"
+				class="search-input focus:outline-0 focus:bg-white focus:border-gray-300 placeholder-gray-600 w-full md:w-64"
 				placeholder="Search..."
 				:value="memoFilterText"
 				@input="updateMemoFilterText"
@@ -79,6 +79,6 @@ export default {
 }
 
 .search-input {
-	@apply transition-colors duration-100 ease-in-out border border-transparent rounded-lg py-2 pr-4 pl-4 block appearance-none leading-normal w-64 rounded-lg shadow
+	@apply transition-colors duration-100 ease-in-out border border-transparent rounded-lg py-2 pr-4 pl-4 block appearance-none leading-normal rounded-lg shadow
 }
 </style>

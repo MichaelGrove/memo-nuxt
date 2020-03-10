@@ -1,13 +1,13 @@
 <template>
 	<div class="grid h-full grid-rows-layout">
-		<header class="flex py-16 px-8 items-center">
-			<nuxt-link to="/" class="flex items-center">
-				<span class="text-2xl font-bold inline-block ml-4 font-display-bold text-gray-100">
+		<header class="lg:flex px-2 py-4 lg:py-16 lg:px-8 items-center block">
+			<nuxt-link to="/" class="flex items-center text-center lg:text-left">
+				<span class="w-full text-3xl font-bold inline-block ml-4 font-display-bold text-gray-100 whitespace-no-wrap">
 					Memo App
 				</span>
 			</nuxt-link>
 			<nav class="font-display px-8 flex-1">
-				<ul class="flex items-center justify-end">
+				<ul class="flex items-center justify-center lg:justify-end">
 					<li>
 						<nuxt-link to="/" class="nav-link">
 							Memos
@@ -20,21 +20,23 @@
 					</li>
 				</ul>
 			</nav>
-			<button
-				v-if="authenticated"
-				type="button"
-				class="sign-in-out"
-				@click="signOut"
-			>
-				Sign out
-			</button>
-			<nuxt-link
-				v-if="!authenticated"
-				to="/login"
-				class="sign-in-out"
-			>
-				Sign In
-			</nuxt-link>
+			<div class="flex lg:block justify-end">
+				<button
+					v-if="authenticated"
+					type="button"
+					class="sign-in-out"
+					@click="signOut"
+				>
+					Sign out
+				</button>
+				<nuxt-link
+					v-if="!authenticated"
+					to="/login"
+					class="sign-in-out"
+				>
+					Sign In
+				</nuxt-link>
+			</div>
 		</header>
 		<main class="p-4 bg-gray-200">
 			<nuxt />
@@ -123,7 +125,7 @@ header {
 }
 
 .sign-in-out {
-	@apply ml-auto my-auto mr-8 font-bold text-gray-800 font-display rounded-full px-4 py-2 bg-gray-200
+	@apply ml-auto my-auto mr-8 font-bold text-gray-800 font-display rounded-full px-4 py-2 bg-gray-200 whitespace-no-wrap
 }
 
 .nav-link {
