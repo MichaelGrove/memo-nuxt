@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col bg-white rounded-lg p-6 shadow relative overflow-hidden" :class="{ favourite: isFavourite, private: isPrivate }">
-		<div v-if="isFavourite"></div>
+	<div class="flex flex-col bg-white rounded-lg p-6 shadow relative overflow-hidden" :class="{ private: isPrivate }">
+		<div v-if="isFavourite" :class="{ favourite: isFavourite }"></div>
 		<div class="flex">
 			<h3 class="text-base flex-1 font-bold text-gray-700 font-display">
 				{{ title }}
