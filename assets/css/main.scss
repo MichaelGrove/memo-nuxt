@@ -43,8 +43,7 @@ body {
 	@apply transition-colors duration-100 ease-in-out border border-transparent rounded-lg py-2 pr-4 pl-4 block appearance-none leading-normal rounded-lg shadow
 }
 
-.favourite:before {
-    content: "";
+.favourite > div:first-child {
     border-left: 1rem solid #535FD7;
     top: 0;
     position: absolute;

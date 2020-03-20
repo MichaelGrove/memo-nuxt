@@ -50,19 +50,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-.memo-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    grid-gap: 1rem;
-    width: 100%;
-}
-
-.memo-list-item {
-	overflow: hidden;
-    padding: 2rem;
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-</style>
