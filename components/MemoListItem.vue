@@ -43,8 +43,11 @@
 			</div>
 		</div>
 		<div class="mt-4">
-			<p class="text-gray-600 italic text-right">
+			<p v-if="calculateTimeDifference > 0" class="text-gray-600 italic text-right">
 				{{ calculateTimeDifference }} days ago
+			</p>
+			<p v-else class="text-gray-600 italic text-right">
+				Today
 			</p>
 		</div>
 	</div>
