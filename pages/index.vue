@@ -66,19 +66,3 @@ export default {
 	}
 }
 </script>
-
-<style>
-.title {
-	font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-	'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-	display: block;
-	font-weight: 300;
-	font-size: 100px;
-	color: #35495e;
-	letter-spacing: 1px;
-}
-
-.search-input {
-	@apply transition-colors duration-100 ease-in-out border border-transparent rounded-lg py-2 pr-4 pl-4 block appearance-none leading-normal rounded-lg shadow
-}
-</style>
