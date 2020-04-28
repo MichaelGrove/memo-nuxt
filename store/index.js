@@ -73,9 +73,7 @@ export const actions = {
 		const password = payload.password
 		return this.$axios.post('/auth/login', { email, password }).then((results) => {
 			const data = results.data ? results.data : {}
-			if (data.error) {
-				window.alert(data.error)
-			} else if (data.token) {
+			if (data.token) {
 				setToken(data.token)
 				this.$axios.setToken(data.token, 'Bearer')
 				this.$router.push('/')
@@ -83,7 +81,9 @@ export const actions = {
 				window.alert('Unexpected error')
 			}
 		}).catch((err) => {
-			window.alert(err)
+			// eslint-disable-next-line no-console
+			console.warn(err)
+			return false
 		})
 	},
 	signOut (state, payload) {
@@ -120,14 +120,14 @@ export const actions = {
 					if (response.data.data) {
 						this.commit('addCategory', response.data.data)
 					}
-				} else if (response.data && response.data.error) {
-					return Promise.reject(new Error(response.data.error))
 				} else {
 					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
-				window.alert(err)
+				// eslint-disable-next-line no-console
+				console.warn(err)
+				return false
 			})
 	},
 	updateCategory (state, data) {
@@ -140,14 +140,14 @@ export const actions = {
 					if (response.data.data) {
 						this.commit('updateCategory', response.data.data)
 					}
-				} else if (response.data && response.data.error) {
-					return Promise.reject(new Error(response.data.error))
 				} else {
 					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
-				window.alert(err)
+				// eslint-disable-next-line no-console
+				console.warn(err)
+				return false
 			})
 	},
 	removeCategoryById (state, id) {
@@ -160,14 +160,14 @@ export const actions = {
 				if (response.data && response.data.success) {
 					this.$router.push('/category')
 					state.commit('removeCategoryById', id)
-				} else if (response.data && response.data.error) {
-					return Promise.reject(new Error(response.data.error))
 				} else {
 					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
-				window.alert(err)
+				// eslint-disable-next-line no-console
+				console.warn(err)
+				return false
 			})
 	},
 	createMemo (state, memo) {
@@ -178,14 +178,14 @@ export const actions = {
 					if (response.data.data) {
 						this.commit('addMemo', response.data.data)
 					}
-				} else if (response.data && response.data.error) {
-					return Promise.reject(new Error(response.data.error))
 				} else {
 					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
-				window.alert(err)
+				// eslint-disable-next-line no-console
+				console.warn(err)
+				return false
 			})
 	},
 	updateMemo (state, data) {
@@ -198,14 +198,14 @@ export const actions = {
 					if (response.data.data) {
 						this.commit('updateMemo', response.data.data)
 					}
-				} else if (response.data && response.data.error) {
-					return Promise.reject(new Error(response.data.error))
 				} else {
 					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
-				window.alert(err)
+				// eslint-disable-next-line no-console
+				console.warn(err)
+				return false
 			})
 	},
 	removeMemoById (state, id) {
@@ -218,14 +218,14 @@ export const actions = {
 				if (response.data && response.data.success) {
 					this.$router.push('/')
 					state.commit('removeMemoById', id)
-				} else if (response.data && response.data.error) {
-					return Promise.reject(new Error(response.data.error))
 				} else {
 					return Promise.reject(new Error('Unexpected error'))
 				}
 			})
 			.catch((err) => {
-				window.alert(err)
+				// eslint-disable-next-line no-console
+				console.warn(err)
+				return false
 			})
 	}
 }

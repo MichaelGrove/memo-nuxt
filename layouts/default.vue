@@ -2,7 +2,7 @@
 	<div class="grid h-full grid-rows-layout">
 		<header class="lg:flex px-2 py-4 lg:py-16 lg:px-8 items-center block">
 			<nuxt-link to="/" class="flex items-center text-center lg:text-left">
-				<span class="w-full text-3xl font-bold inline-block ml-4 font-display-bold text-gray-100 whitespace-no-wrap">
+				<span class="w-full text-3xl font-bold inline-block lg:ml-4 font-display-bold text-gray-100 whitespace-no-wrap">
 					Memo App
 				</span>
 			</nuxt-link>
