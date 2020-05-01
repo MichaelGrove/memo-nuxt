@@ -18,7 +18,7 @@
 				class="search-input focus:outline-0 focus:bg-white focus:border-gray-300 placeholder-gray-600 w-full md:w-64"
 				placeholder="Search..."
 				:value="memoFilterText"
-				@input="updateMemoFilterText"
+				@input="(e) => updateMemoFilterText(e.target.value)"
 			>
 			<ul>
 				<li v-for="category in memoFilterCategories" :key="category.cid">
@@ -56,9 +56,17 @@ export default {
 			return this.$store.getters.memoFilterCategories
 		}
 	},
+	mounted () {
+		const query = this.$route.query
+		if (query.search) {
+			this.updateMemoFilterText(query.search)
+		}
+	},
 	methods: {
-		updateMemoFilterText (e) {
-			this.$store.commit('setMemoFilterText', String(e.target.value))
+		updateMemoFilterText (value) {
+			const val = String(value)
+			this.$router.push({ query: { search: val } })
+			this.$store.commit('setMemoFilterText', val)
 		},
 		disposeFilterCategory (cid) {
 			this.$store.commit('removeMemoFilterCategory', Number(cid))
