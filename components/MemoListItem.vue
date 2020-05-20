@@ -100,29 +100,34 @@ export default {
 		},
 		parsedMessage () {
 			const ret = []
-			let message = String(this.message)
-			let urls = this.searchUrls(message)
-			urls = urls && urls.length > 0 ? urls : []
-			urls.forEach((url) => {
-				const line = message.slice(0, message.indexOf(url))
-				if (line) {
+			const message = String(this.message)
+			const messageStrings = message.split('\n').map(str => str.trim())
+
+			messageStrings.forEach((str) => {
+				let urls = this.searchUrls(str)
+				urls = urls && urls.length > 0 ? urls : []
+				urls.forEach((url) => {
+					const line = str.slice(0, str.indexOf(url))
+					if (line) {
+						ret.push({
+							type: 'text',
+							text: line.trim()
+						})
+					}
+					ret.push({
+						type: 'link',
+						text: url.replace(/(?:\r\n|\r|\n)/g, '')
+					})
+					str = str.replace(line, '').replace(url, '')
+				})
+				if (str.length > 0) {
 					ret.push({
 						type: 'text',
-						text: line
+						text: str
 					})
 				}
-				ret.push({
-					type: 'link',
-					text: url.replace(/(?:\r\n|\r|\n)/g, '')
-				})
-				message = message.replace(line, '').replace(url, '')
 			})
-			if (message.length > 0) {
-				ret.push({
-					type: 'text',
-					text: message
-				})
-			}
+
 			return ret
 		},
 		calculateTimeDifference () {
