@@ -5,7 +5,7 @@
 			<h3 class="text-base flex-1 font-bold text-gray-700 font-display">
 				{{ title }}
 			</h3>
-			<nuxt-link v-if="authenticated" :to="`memo/edit/${mid}`">
+			<nuxt-link v-if="isAuthenticated" :to="`memo/edit/${mid}`">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CategoryFilterButton from './CategoryFilterButton'
 import MemoListItemText from './MemoListItemText'
 
@@ -95,9 +96,7 @@ export default {
 		}
 	},
 	computed: {
-		authenticated () {
-			return this.$store.getters.authenticated
-		},
+		...mapGetters({ isAuthenticated: 'auth/isAuthenticated' }),
 		parsedMessage () {
 			const ret = []
 			const message = String(this.message)

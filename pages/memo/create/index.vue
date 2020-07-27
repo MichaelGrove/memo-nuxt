@@ -154,7 +154,7 @@ export default {
 	},
 	methods: {
 		initCategories () {
-			const categories = this.$store.getters.categories
+			const categories = this.$store.state.memo.categories
 			if (Array.isArray(categories) && categories.length > 0) {
 				this.allCategories = categories
 			} else if (!this.categoryFetchAttempted) {
@@ -165,10 +165,10 @@ export default {
 		},
 		fetchCategoryItems () {
 			this.categoryFetchAttempted = true
-			return this.$store.dispatch('getCategories', {})
+			return this.$store.dispatch('memo/fetchCategories', {})
 		},
 		getCategoryById (id) {
-			return this.$store.getters.categories.find(x => x.cid === Number(id))
+			return this.$store.state.memo.categories.find(x => x.cid === Number(id))
 		},
 		addCategory () {
 			if (!this.selectedCategoryId) {
@@ -189,9 +189,7 @@ export default {
 			this.categories = Array.isArray(this.categories) ? [...this.categories, category] : [category]
 		},
 		disposeCategory (cid) {
-			this.categories = this.categories.filter((category) => {
-				return category.cid !== Number(cid)
-			})
+			this.categories = this.categories.filter(category => category.cid !== Number(cid))
 		},
 		save () {
 			const memo = {
@@ -204,7 +202,7 @@ export default {
 				})
 			}
 
-			this.$store.dispatch('createMemo', memo)
+			this.$store.dispatch('memo/createMemo', memo)
 		}
 	}
 }

@@ -5,7 +5,7 @@
 				Resources
 			</h1>
 			<nuxt-link
-				v-if="authenticated"
+				v-if="isAuthenticated"
 				to="/memo/create"
 				class="form-button ml-auto my-auto bg-green-500 hover:bg-green-500 focus:outline-none focus:shadow-outline"
 			>
@@ -17,11 +17,11 @@
 				type="text"
 				class="search-input focus:outline-0 focus:bg-white focus:border-gray-300 placeholder-gray-600 w-full md:w-64"
 				placeholder="Search..."
-				:value="memoFilterText"
+				:value="filterText"
 				@input="(e) => updateMemoFilterText(e.target.value)"
 			>
 			<ul>
-				<li v-for="category in memoFilterCategories" :key="category.cid">
+				<li v-for="category in filterCategories" :key="category.cid">
 					<CategoryButton
 						:cid="category.cid"
 						:label="category.label"
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+
 import MemoList from '../components/MemoList'
 import CategoryButton from '../components/CategoryButton'
 
@@ -46,15 +48,13 @@ export default {
 		CategoryButton
 	},
 	computed: {
-		authenticated () {
-			return this.$store.getters.authenticated
-		},
-		memoFilterText () {
-			return this.$store.getters.memoFilterText
-		},
-		memoFilterCategories () {
-			return this.$store.getters.memoFilterCategories
-		}
+		...mapGetters({
+			isAuthenticated: 'auth/isAuthenticated'
+		}),
+		...mapState({
+			filterCategories: 'memo/filterCategories',
+			filterText: 'memo/filterText'
+		})
 	},
 	mounted () {
 		const query = this.$route.query
@@ -66,10 +66,10 @@ export default {
 		updateMemoFilterText (value) {
 			const val = String(value)
 			this.$router.push({ query: { search: val } })
-			this.$store.commit('setMemoFilterText', val)
+			this.$store.commit('memo/SET_FILTER_TEXT', val)
 		},
 		disposeFilterCategory (cid) {
-			this.$store.commit('removeMemoFilterCategory', Number(cid))
+			this.$store.commit('memo/REMOVE_FILTER_CATEGORY', Number(cid))
 		}
 	}
 }

@@ -73,17 +73,15 @@ export default {
 				this.label = item.label
 				this.color = item.color
 			} else if (!this.fetchAttempted) {
-				this.fetchCategoryItems().then(() => {
-					this.init()
-				})
+				this.fetchCategoryItems().then(this.init)
 			}
 		},
 		fetchCategoryItems () {
 			this.fetchAttempted = true
-			return this.$store.dispatch('getCategories', {})
+			return this.$store.dispatch('memo/fetchCategories', {})
 		},
 		getCategoryById (id) {
-			return this.$store.getters.categories.find(x => x.cid === Number(id))
+			return this.$store.state.memo.categories.find(x => x.cid === Number(id))
 		},
 		save () {
 			if (!this.cid) {
@@ -91,18 +89,19 @@ export default {
 			}
 
 			const category = {
+				cid: this.cid,
 				label: this.label,
 				color: this.color
 			}
 
-			this.$store.dispatch('updateCategory', { cid: this.cid, category })
+			this.$store.dispatch('memo/updateCategory', category)
 		},
 		dispose () {
 			if (!this.cid) {
 				return
 			}
 
-			this.$store.dispatch('removeCategoryById', this.cid)
+			this.$store.dispatch('memo/removeCategory', this.cid)
 		}
 	}
 }

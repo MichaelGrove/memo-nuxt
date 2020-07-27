@@ -160,6 +160,7 @@ export default {
 		}
 	},
 	mounted () {
+		// TODO: Move to default layout? Make mixins?
 		this.initMemos()
 		this.initCategories()
 	},
@@ -179,7 +180,7 @@ export default {
 			}
 		},
 		initCategories () {
-			const categories = this.$store.getters.categories
+			const categories = this.$store.state.memo.categories
 			if (Array.isArray(categories) && categories.length > 0) {
 				this.allCategories = categories
 			} else if (!this.categoryFetchAttempted) {
@@ -190,17 +191,17 @@ export default {
 		},
 		fetchMemoItems () {
 			this.memoFetchAttempted = true
-			return this.$store.dispatch('getMemos', {})
+			return this.$store.dispatch('memo/fetchMemos', {})
 		},
 		fetchCategoryItems () {
 			this.categoryFetchAttempted = true
-			return this.$store.dispatch('getCategories', {})
+			return this.$store.dispatch('memo/fetchCategories', {})
 		},
 		getMemoById (id) {
-			return this.$store.getters.memos.find(x => x.mid === Number(id))
+			return this.$store.state.memo.memos.find(x => x.mid === Number(id))
 		},
 		getCategoryById (id) {
-			return this.$store.getters.categories.find(x => x.cid === Number(id))
+			return this.$store.state.memo.categories.find(x => x.cid === Number(id))
 		},
 		addCategory () {
 			if (!this.selectedCategoryId) {
@@ -235,6 +236,7 @@ export default {
 			}) : []
 
 			const memo = {
+				mid: this.mid,
 				title: this.title,
 				message: this.message,
 				isFavourite: this.isFavourite ? 1 : 0,
@@ -242,14 +244,14 @@ export default {
 				categories
 			}
 
-			this.$store.dispatch('updateMemo', { mid: this.mid, memo })
+			this.$store.dispatch('memo/updateMemo', memo)
 		},
 		dispose () {
 			if (!this.mid) {
 				return
 			}
 
-			this.$store.dispatch('removeMemoById', this.mid)
+			this.$store.dispatch('memo/removeMemo', this.mid)
 		}
 	}
 }

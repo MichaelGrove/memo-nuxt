@@ -15,6 +15,7 @@
 </template>
 
 <script>
+// import { mapState } from 'vuex'
 import MemoListItem from './MemoListItem'
 
 export default {
@@ -23,13 +24,17 @@ export default {
 		MemoListItem
 	},
 	computed: {
+		// ...mapState({
+		// 	filterCategories: 'memo/filterCategories',
+		// 	filterText: 'memo/filterText',
+		// 	allMemos: 'memo/memos'
+		// }),
 		memos () {
-			const memos = this.$store.getters.memos
-			const filterCids = this.$store.getters.memoFilterCategories.map((category) => {
-				return category.cid
-			})
-			let memoFilterText = this.$store.getters.memoFilterText
-			memoFilterText = typeof memoFilterText === 'string' ? memoFilterText.toLowerCase() : ''
+			const memoState = this.$store.state.memo || {}
+			const memos = memoState.memos
+			const filterText = String(memoState.filterText).toLowerCase()
+			const filterCids = memoState.filterCategories.map(category => category.cid)
+
 			const filtered = memos.filter((memo) => {
 				const title = typeof memo.title === 'string' ? memo.title.toLowerCase() : ''
 				const message = typeof memo.message === 'string' ? memo.message.toLowerCase() : ''
@@ -37,7 +42,7 @@ export default {
 				const hasMatchingCategory = categories.find((category) => {
 					return filterCids.includes(category.cid)
 				}) || false
-				return (title.includes(memoFilterText) || message.includes(memoFilterText)) && (filterCids.length === 0 || hasMatchingCategory)
+				return (title.includes(filterText) || message.includes(filterText)) && (filterCids.length === 0 || hasMatchingCategory)
 			})
 			const sorted = filtered.sort((a, b) => {
 				return this.$moment(b.createdAt).unix() - this.$moment(a.createdAt).unix()
@@ -46,7 +51,7 @@ export default {
 		}
 	},
 	mounted () {
-		this.$store.dispatch('getMemos')
+		this.$store.dispatch('memo/fetchMemos')
 	}
 }
 </script>

@@ -1,7 +1,5 @@
-import { getToken } from '../plugins/token'
-
 export default function ({ redirect }) {
-	if (!getToken()) {
+	if (!localStorage.getItem('user')) {
 		redirect('/login')
 	}
 }

@@ -13,7 +13,7 @@
 							Memos
 						</nuxt-link>
 					</li>
-					<li v-if="authenticated">
+					<li v-if="isAuthenticated || false">
 						<nuxt-link to="/category" class="nav-link">
 							Categories
 						</nuxt-link>
@@ -22,15 +22,15 @@
 			</nav>
 			<div class="flex lg:block justify-end">
 				<button
-					v-if="authenticated"
+					v-if="isAuthenticated || false"
 					type="button"
 					class="sign-in-out"
-					@click="signOut"
+					@click="$store.dispatch('auth/signOut')"
 				>
 					Sign out
 				</button>
 				<nuxt-link
-					v-if="!authenticated"
+					v-if="!(isAuthenticated || false)"
 					to="/login"
 					class="sign-in-out"
 				>
@@ -46,22 +46,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppFooter from '../components/AppFooter'
 
 export default {
 	components: {
 		AppFooter
 	},
-	middleware: 'authenticated',
 	computed: {
-		authenticated () {
-			return this.$store.getters.authenticated
-		}
+		...mapGetters({
+			isAuthenticated: 'auth/isAuthenticated'
+		})
 	},
-	methods: {
-		signOut () {
-			this.$store.dispatch('signOut')
-		}
+	mounted () {
+		this.$store.dispatch('auth/token')
 	}
 }
 </script>

@@ -61,7 +61,7 @@ export default {
 				color: this.color
 			}
 
-			this.$store.dispatch('createCategory', category)
+			this.$store.dispatch('memo/createCategory', category)
 		}
 	}
 }

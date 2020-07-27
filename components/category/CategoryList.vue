@@ -20,11 +20,11 @@ export default {
 	},
 	computed: {
 		categories () {
-			return this.$store.getters.categories
+			return this.$store.state.memo.categories
 		}
 	},
 	mounted () {
-		this.$store.dispatch('getCategories', {})
+		this.$store.dispatch('memo/fetchCategories')
 	}
 }
 </script>
