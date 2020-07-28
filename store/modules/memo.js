@@ -53,7 +53,7 @@ export const mutations = {
 export const actions = {
 	// memos
 	fetchMemos ({ commit }) {
-		return this.$axios.post('/memo')
+		return this.$axios.get('/memo')
 			.then(({ data }) => {
 				const memos = data && Array.isArray(data.data) ? data.data : []
 				commit('SET_MEMOS', memos)
@@ -65,7 +65,7 @@ export const actions = {
 			})
 	},
 	createMemo ({ commit }, memo) {
-		return this.$axios.post('/memo/create', memo)
+		return this.$axios.post(`/memo/${memo.mid}`, memo)
 			.then(({ data }) => {
 				const newMemo = data.data
 				commit('ADD_MEMO', newMemo)
@@ -78,7 +78,7 @@ export const actions = {
 			})
 	},
 	updateMemo ({ commit }, memo) {
-		this.$axios.post(`/memo/update/${memo.mid}`, memo)
+		return this.$axios.put(`/memo/${memo.mid}`, memo)
 			.then(({ data }) => {
 				const updatedMemo = data.data
 				commit('UPDATE_MEMO', updatedMemo)
@@ -91,7 +91,7 @@ export const actions = {
 			})
 	},
 	removeMemo ({ commit }, id) {
-		return this.$axios.post(`/memo/delete/${id}`)
+		return this.$axios.delete(`/memo/${id}`)
 			.then(() => {
 				this.$router.push('/')
 				commit('REMOVE_MEMO', id)
@@ -105,7 +105,7 @@ export const actions = {
 
 	// categories
 	fetchCategories ({ commit }) {
-		return this.$axios.post('/category')
+		return this.$axios.get('/category')
 			.then(({ data }) => {
 				const categories = data && Array.isArray(data.data) ? data.data : []
 				commit('SET_CATEGORIES', categories)
@@ -117,7 +117,7 @@ export const actions = {
 			})
 	},
 	createCategory ({ commit }, category) {
-		return this.$axios.post('/category/create', category)
+		return this.$axios.post(`/category/${category.mid}`)
 			.then(({ data }) => {
 				const newCategory = data.data
 				if (newCategory) {
@@ -134,9 +134,7 @@ export const actions = {
 			})
 	},
 	updateCategory ({ commit }, category) {
-		// const cid = data.cid
-		// const category = data.category
-		this.$axios.post(`/category/update/${category.cid}`, category)
+		return this.$axios.put(`/category/${category.mid}`, category)
 			.then(({ data }) => {
 				const updatedCategory = data.data
 				commit('UPDATE_CATEGORY', updatedCategory)
@@ -149,7 +147,7 @@ export const actions = {
 			})
 	},
 	removeCategory ({ commit }, id) {
-		return this.$axios.post(`/category/delete/${id}`)
+		return this.$axios.delete(`/category/${id}`)
 			.then(() => {
 				this.$router.push('/category')
 				commit('REMOVE_CATEGORY', id)
