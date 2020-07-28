@@ -1,5 +1,10 @@
 <template>
-	<section class="grid grid-cols-memo-layout gap-4">
+	<transition-group
+		name="slide-up"
+		tag="section"
+		class="grid grid-cols-memo-layout gap-4"
+		:appear="true"
+	>
 		<MemoListItem
 			v-for="memo in memos"
 			:key="memo.mid"
@@ -11,7 +16,7 @@
 			:is-favourite="memo.isFavourite ? true : false"
 			:is-private="memo.isHidden ? true : false"
 		/>
-	</section>
+	</transition-group>
 </template>
 
 <script>
@@ -55,3 +60,16 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+.slide-up-enter {
+	transform: translateY(10px);
+	opacity: 0;
+}
+.slide-up-enter-active {
+	transition: all 0.2s ease;
+}
+.slide-up-move {
+	transition: transform .5s ease-out;
+}
+</style>
