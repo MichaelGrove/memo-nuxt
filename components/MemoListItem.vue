@@ -144,7 +144,7 @@ export default {
 				return category.cid === cid
 			})
 			if (cat) {
-				this.$store.commit('addMemoFilterCategory', cat)
+				this.$store.commit('memo/ADD_FILTER_CATEGORY', cat)
 			}
 		}
 	}
