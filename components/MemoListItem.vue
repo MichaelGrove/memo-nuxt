@@ -24,7 +24,7 @@
 			</nuxt-link>
 		</div>
 		<div class="flex-1">
-			<p class="text-gray-800 break-all">
+			<p class="text-gray-800 break-all overflow-y-auto" style="max-height: 350px;">
 				<MemoListItemText
 					v-for="(line, i) in parsedMessage"
 					:key="i"
