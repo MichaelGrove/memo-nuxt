@@ -18,6 +18,11 @@ module.exports = {
 				'display-bold': ['Raleway Bold', 'sans-serif'],
 				body: ['Lusitania', 'serif'],
 				'body-bold': ['Lusitania Bold', 'serif']
+			},
+			colors: {
+				highlight: '#535FD7',
+				'highlight-hover': '#414DD2',
+				dark: '#34373c'
 			}
 		},
 		screens: {

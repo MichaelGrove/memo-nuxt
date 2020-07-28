@@ -24,7 +24,7 @@
 				<button
 					v-if="isAuthenticated || false"
 					type="button"
-					class="sign-in-out"
+					class="sign-in-out bg-highlight hover:bg-highlight-hover"
 					@click="$store.dispatch('auth/signOut')"
 				>
 					Sign out
@@ -32,7 +32,7 @@
 				<nuxt-link
 					v-if="!(isAuthenticated || false)"
 					to="/login"
-					class="sign-in-out"
+					class="sign-in-out bg-highlight hover:bg-highlight-hover ker"
 				>
 					Sign In
 				</nuxt-link>
