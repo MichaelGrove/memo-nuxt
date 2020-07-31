@@ -65,7 +65,7 @@ export const actions = {
 			})
 	},
 	createMemo ({ commit }, memo) {
-		return this.$axios.post(`/memo/${memo.mid}`, memo)
+		return this.$axios.post('/memo', memo)
 			.then(({ data }) => {
 				const newMemo = data.data
 				commit('ADD_MEMO', newMemo)
@@ -117,7 +117,7 @@ export const actions = {
 			})
 	},
 	createCategory ({ commit }, category) {
-		return this.$axios.post(`/category/${category.mid}`)
+		return this.$axios.post('/category', category)
 			.then(({ data }) => {
 				const newCategory = data.data
 				if (newCategory) {
