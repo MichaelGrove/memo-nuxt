@@ -5,7 +5,6 @@
 			:key="category.id"
 			:cid="category.cid"
 			:label="category.label"
-			:color="category.color"
 		/>
 	</div>
 </template>

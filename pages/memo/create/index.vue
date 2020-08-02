@@ -107,7 +107,6 @@
 						<CategoryButton
 							:cid="category.cid"
 							:label="category.label"
-							:color="category.color"
 							@onDispose="disposeCategory"
 						/>
 					</li>

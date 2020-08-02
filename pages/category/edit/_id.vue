@@ -18,20 +18,6 @@
 					class="form-input focus:outline-none focus:shadow-outline"
 				/>
 			</div>
-			<div class="mb-4">
-				<label
-					for="category_color"
-					class="form-label"
-				>
-					Color
-				</label>
-				<input
-					id="category_color"
-					v-model="color"
-					type="text"
-					class="form-input focus:outline-none focus:shadow-outline"
-				/>
-			</div>
 			<div class="flex items-center justify-between mt-8 pt-4 border-t-2">
 				<button
 					type="button"
@@ -59,8 +45,7 @@ export default {
 		return {
 			fetchAttempted: false,
 			cid: this.$route.params.id,
-			label: '',
-			color: ''
+			label: ''
 		}
 	},
 	mounted () {
@@ -71,7 +56,6 @@ export default {
 			const item = this.getCategoryById(this.cid)
 			if (item) {
 				this.label = item.label
-				this.color = item.color
 			} else if (!this.fetchAttempted) {
 				this.fetchCategoryItems().then(this.init)
 			}
@@ -90,8 +74,7 @@ export default {
 
 			const category = {
 				cid: this.cid,
-				label: this.label,
-				color: this.color
+				label: this.label
 			}
 
 			this.$store.dispatch('memo/updateCategory', category)

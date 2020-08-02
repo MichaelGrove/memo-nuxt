@@ -18,20 +18,6 @@
 					class="form-input focus:outline-none focus:shadow-outline"
 				/>
 			</div>
-			<div class="mb-4">
-				<label
-					for="category_color"
-					class="form-label"
-				>
-					Color
-				</label>
-				<input
-					id="category_color"
-					v-model="color"
-					type="text"
-					class="form-input focus:outline-none focus:shadow-outline"
-				/>
-			</div>
 			<div class="flex items-center justify-between">
 				<button
 					class="form-button bg-green-500 hover:bg-blue-700 focus:outline-none focus:shadow-outline"
@@ -50,15 +36,13 @@ export default {
 	middleware: 'auth-required',
 	data () {
 		return {
-			label: '',
-			color: ''
+			label: ''
 		}
 	},
 	methods: {
 		save () {
 			const category = {
-				label: this.label,
-				color: this.color
+				label: this.label
 			}
 
 			this.$store.dispatch('memo/createCategory', category)

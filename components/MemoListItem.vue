@@ -38,7 +38,6 @@
 					:key="category.cid"
 					:cid="category.cid"
 					:label="category.label"
-					:color="category.color"
 					@onClick="onCategoryClick"
 				/>
 			</div>

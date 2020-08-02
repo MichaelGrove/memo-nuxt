@@ -18,7 +18,6 @@
 					<CategoryButton
 						:cid="category.cid"
 						:label="category.label"
-						:color="category.color"
 						:can-dispose="true"
 						@onDispose="disposeFilterCategory"
 					/>
