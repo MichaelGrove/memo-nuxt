@@ -78,6 +78,12 @@ export default {
 			}
 
 			this.$store.dispatch('memo/updateCategory', category)
+				.then(() => this.$router.push('/category'))
+				.catch((err) => {
+					// TODO: Handle error
+					// eslint-disable-next-line no-console
+					console.warn(err)
+				})
 		},
 		dispose () {
 			if (!this.cid) {
@@ -85,6 +91,12 @@ export default {
 			}
 
 			this.$store.dispatch('memo/removeCategory', this.cid)
+				.then(() => this.$router.push('/category'))
+				.catch((err) => {
+					// TODO: Handle error
+					// eslint-disable-next-line no-console
+					console.warn(err)
+				})
 		}
 	}
 }

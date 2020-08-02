@@ -202,6 +202,12 @@ export default {
 			}
 
 			this.$store.dispatch('memo/createMemo', memo)
+				.then(() => this.$router.push('/'))
+				.catch((err) => {
+					// TODO: Handle error
+					// eslint-disable-next-line no-console
+					console.warn(err)
+				})
 		}
 	}
 }

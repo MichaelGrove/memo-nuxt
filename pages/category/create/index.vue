@@ -46,6 +46,12 @@ export default {
 			}
 
 			this.$store.dispatch('memo/createCategory', category)
+				.then(() => this.$router.push('/category'))
+				.catch((err) => {
+					// TODO: Handle error
+					// eslint-disable-next-line no-console
+					console.warn(err)
+				})
 		}
 	}
 }

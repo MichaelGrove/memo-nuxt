@@ -67,39 +67,22 @@ export const actions = {
 	createMemo ({ commit }, memo) {
 		return this.$axios.post('/memo', memo)
 			.then(({ data }) => {
-				const newMemo = data.data
-				commit('ADD_MEMO', newMemo)
-				this.$router.push('/')
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.warn(err)
-				return false
+				commit('ADD_MEMO', data.data)
+				return data.data
 			})
 	},
 	updateMemo ({ commit }, memo) {
 		return this.$axios.put(`/memo/${memo.mid}`, memo)
 			.then(({ data }) => {
-				const updatedMemo = data.data
-				commit('UPDATE_MEMO', updatedMemo)
-				this.$router.push('/')
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.warn(err)
-				return false
+				commit('UPDATE_MEMO', data.data)
+				return data.data
 			})
 	},
 	removeMemo ({ commit }, id) {
 		return this.$axios.delete(`/memo/${id}`)
 			.then(() => {
-				this.$router.push('/')
 				commit('REMOVE_MEMO', id)
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.warn(err)
-				return false
+				return true
 			})
 	},
 
@@ -119,43 +102,22 @@ export const actions = {
 	createCategory ({ commit }, category) {
 		return this.$axios.post('/category', category)
 			.then(({ data }) => {
-				const newCategory = data.data
-				if (newCategory) {
-					commit('ADD_CATEGORY', newCategory)
-				}
-
-				this.$router.push('/category')
-				return newCategory
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.warn(err)
-				return false
+				commit('ADD_CATEGORY', data.data)
+				return data.data
 			})
 	},
 	updateCategory ({ commit }, category) {
 		return this.$axios.put(`/category/${category.cid}`, category)
 			.then(({ data }) => {
-				const updatedCategory = data.data
-				commit('UPDATE_CATEGORY', updatedCategory)
-				this.$router.push('/category')
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.warn(err)
-				return false
+				commit('UPDATE_CATEGORY', data.data)
+				return data.data
 			})
 	},
 	removeCategory ({ commit }, id) {
 		return this.$axios.delete(`/category/${id}`)
 			.then(() => {
-				this.$router.push('/category')
 				commit('REMOVE_CATEGORY', id)
-			})
-			.catch((err) => {
-				// eslint-disable-next-line no-console
-				console.warn(err)
-				return false
+				return true
 			})
 	}
 }

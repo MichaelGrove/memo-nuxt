@@ -244,6 +244,12 @@ export default {
 			}
 
 			this.$store.dispatch('memo/updateMemo', memo)
+				.then(() => this.$router.push('/'))
+				.catch((err) => {
+					// TODO: Handle error
+					// eslint-disable-next-line no-console
+					console.warn(err)
+				})
 		},
 		dispose () {
 			if (!this.mid) {
@@ -251,6 +257,12 @@ export default {
 			}
 
 			this.$store.dispatch('memo/removeMemo', this.mid)
+				.then(() => this.$router.push('/'))
+				.catch((err) => {
+					// TODO: Handle error
+					// eslint-disable-next-line no-console
+					console.warn(err)
+				})
 		}
 	}
 }
