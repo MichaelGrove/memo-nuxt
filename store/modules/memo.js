@@ -134,7 +134,7 @@ export const actions = {
 			})
 	},
 	updateCategory ({ commit }, category) {
-		return this.$axios.put(`/category/${category.mid}`, category)
+		return this.$axios.put(`/category/${category.cid}`, category)
 			.then(({ data }) => {
 				const updatedCategory = data.data
 				commit('UPDATE_CATEGORY', updatedCategory)
