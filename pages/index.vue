@@ -51,10 +51,13 @@ export default {
 		...mapGetters({
 			isAuthenticated: 'auth/isAuthenticated'
 		}),
-		...mapState({
-			filterCategories: 'memo/filterCategories',
-			filterText: 'memo/filterText'
-		})
+		...mapState(['memo']),
+		filterCategories () {
+			return this.memo.filterCategories
+		},
+		filterText () {
+			return this.memo.filterText
+		}
 	},
 	mounted () {
 		const query = this.$route.query
