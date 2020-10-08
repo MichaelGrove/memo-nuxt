@@ -16,9 +16,8 @@ export default function ({ $axios, redirect }) {
 		if (error.response.status === 500) {
 			redirect('/')
 		} else if (error.response.status === 403) {
-			$axios.removeToken()
+			$axios.setToken(null)
 			localStorage.removeItem('user')
-			redirect('/')
 		} else if (error.response.status === 422) {
 			const { errors } = error.response.data
 			if (errors && errors.length > 0) {
