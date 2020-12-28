@@ -15,9 +15,10 @@ module.exports = {
   rules: {
     indent: [2, "tab"],
     "no-tabs": 0,
-	"no-control-regex": 0,
-	"vue/html-indent": "off",
-	"css/css-semicolonexpected": "off",
-	"vue/html-self-closing": "off"
+    "no-control-regex": 0,
+    "vue/html-indent": "off",
+    "css/css-semicolonexpected": "off",
+    "vue/html-self-closing": "off",
+    "vue/comment-directive": "off"
   }
 }
