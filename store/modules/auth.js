@@ -40,14 +40,14 @@ export const actions = {
 	},
 	token ({ commit }) {
 		return this.$axios.post('/auth/token')
-			.then(({ data }) => {
-				if (!data.success) {
-					this.dispatch('auth/signOut')
-				} else {
+			.then((response) => {
+				if (response.status === 200) {
 					const user = localStorage.getItem('user')
 					if (user && typeof user === 'string') {
 						commit('SET_USER_DATA', JSON.parse(user))
 					}
+				} else {
+					this.dispatch('auth/signOut')
 				}
 			})
 			.catch(err => console.warn(err))

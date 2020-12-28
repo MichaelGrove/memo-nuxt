@@ -67,15 +67,15 @@ export const actions = {
 	createMemo ({ commit }, memo) {
 		return this.$axios.post('/memo', memo)
 			.then(({ data }) => {
-				commit('ADD_MEMO', data.data)
-				return data.data
+				commit('ADD_MEMO', data.memo)
+				return data.memo
 			})
 	},
 	updateMemo ({ commit }, memo) {
 		return this.$axios.put(`/memo/${memo.mid}`, memo)
 			.then(({ data }) => {
-				commit('UPDATE_MEMO', data.data)
-				return data.data
+				commit('UPDATE_MEMO', data.memo)
+				return data.memo
 			})
 	},
 	removeMemo ({ commit }, id) {
@@ -102,14 +102,14 @@ export const actions = {
 	createCategory ({ commit }, category) {
 		return this.$axios.post('/category', category)
 			.then(({ data }) => {
-				commit('ADD_CATEGORY', data.data)
+				commit('ADD_CATEGORY', data.category)
 				return data.data
 			})
 	},
 	updateCategory ({ commit }, category) {
 		return this.$axios.put(`/category/${category.cid}`, category)
 			.then(({ data }) => {
-				commit('UPDATE_CATEGORY', data.data)
+				commit('UPDATE_CATEGORY', data.category)
 				return data.data
 			})
 	},
