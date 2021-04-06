@@ -24,14 +24,7 @@
 			</nuxt-link>
 		</div>
 		<div class="flex-1">
-			<p class="text-gray-800 break-all overflow-y-auto" style="max-height: 350px;">
-				<MemoListItemText
-					v-for="(line, i) in parsedMessage"
-					:key="i"
-					:type="line.type"
-					:text="line.text"
-				/>
-			</p>
+			<p class="marked-text text-gray-800 break-all overflow-y-auto" style="max-height: 350px;" v-html="markdown"></p>
 			<div class="mt-4">
 				<CategoryFilterButton
 					v-for="category in categories"
@@ -54,16 +47,13 @@
 </template>
 
 <script>
+import marked from 'marked'
 import { mapGetters } from 'vuex'
 import CategoryFilterButton from './CategoryFilterButton'
-import MemoListItemText from './MemoListItemText'
 
 export default {
 	name: 'MemoListItem',
-	components: {
-		CategoryFilterButton,
-		MemoListItemText
-	},
+	components: { CategoryFilterButton },
 	props: {
 		mid: {
 			type: Number,
@@ -96,37 +86,8 @@ export default {
 	},
 	computed: {
 		...mapGetters({ isAuthenticated: 'auth/isAuthenticated' }),
-		parsedMessage () {
-			const ret = []
-			const message = String(this.message)
-			const messageStrings = message.split('\n').map(str => str.trim())
-
-			messageStrings.forEach((str) => {
-				let urls = this.searchUrls(str)
-				urls = urls && urls.length > 0 ? urls : []
-				urls.forEach((url) => {
-					const line = str.slice(0, str.indexOf(url))
-					if (line) {
-						ret.push({
-							type: 'text',
-							text: line.trim()
-						})
-					}
-					ret.push({
-						type: 'link',
-						text: url.replace(/(?:\r\n|\r|\n)/g, '')
-					})
-					str = str.replace(line, '').replace(url, '')
-				})
-				if (str.length > 0) {
-					ret.push({
-						type: 'text',
-						text: str
-					})
-				}
-			})
-
-			return ret
+		markdown () {
+			return marked(this.message, { sanitize: true })
 		},
 		calculateTimeDifference () {
 			return this.$moment().diff(this.createdAt, 'days')
@@ -149,3 +110,15 @@ export default {
 	}
 }
 </script>
+
+<style>
+.marked-text a {
+	@apply text-blue-600;
+}
+.marked-text a:visited {
+	@apply text-purple-600;
+}
+.marked-text a:hover {
+	@apply underline;
+}
+</style>
